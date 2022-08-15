@@ -28,3 +28,14 @@
   text-indent: 5px;
   outline: none;
 }
+
+.img-container {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.meme--image {
+  max-width: 400px;
+}
