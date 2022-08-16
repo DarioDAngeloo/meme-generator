@@ -3,13 +3,31 @@ import memesData from "../memesData";
 import { useState } from "react";
 
 const Form = () => {
-  const [memes, setMeme] = useState("");
+  // 1# first state to determine basic propertys as objects
+
+  const [memes, setMeme] = useState({
+    topText: "",
+    bottomText: "",
+    randomImage: "http://i.imgflip.com/1bij.jpg",
+  });
+
+  // 2# second state
+
+  const [allMemeImages, setAllMemeImages] = useState(memesData);
+
+  // when someone clicks on the button
 
   const getMeme = () => {
-    const memesArray = memesData.data.memes;
+    const memesArray = allMemeImages.data.memes;
     const randomNumber = Math.floor(Math.random() * memesArray.length);
-    setMeme(memesArray[randomNumber].url);
+    const url = memesArray[randomNumber].url;
+    setMeme((e) => ({
+      ...e,
+      randomImage: url,
+    }));
   };
+
+  // return section to DOM
 
   return (
     <main>
@@ -21,7 +39,7 @@ const Form = () => {
         </button>
       </div>
       <div className="img-container">
-        <img src={memes} className="meme--image" alt="" />
+        <img src={memes.randomImage} className="meme--image" alt="" />
       </div>
     </main>
   );
