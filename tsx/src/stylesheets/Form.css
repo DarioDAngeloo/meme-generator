@@ -19,6 +19,7 @@
   outline: none;
   border: #4caf50 1px solid;
   border-radius: 10px;
+  transition: all 300ms ease;
 }
 
 .form--button:hover {
