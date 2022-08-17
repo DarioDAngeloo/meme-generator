@@ -1,6 +1,5 @@
 import "../stylesheets/Form.css";
-import memesData from "../memesData";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Form = () => {
   // 1# first state to determine basic propertys as objects
@@ -13,14 +12,22 @@ const Form = () => {
 
   // 2# second state
 
-  const [allMemeImages, setAllMemeImages] = useState(memesData);
+  const [allMemeImages, setAllMemeImages] = useState<any[]>([]);
 
   // when someone clicks on the button
+  //
+
+  useEffect(() => {
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((data) => setAllMemeImages(data.data.memes));
+  }, []);
+
+  //
 
   const getMeme = () => {
-    const memesArray = allMemeImages.data.memes;
-    const randomNumber = Math.floor(Math.random() * memesArray.length);
-    const url = memesArray[randomNumber].url;
+    const randomNumber = Math.floor(Math.random() * allMemeImages.length);
+    const url = allMemeImages[randomNumber].url;
     setMeme((e) => ({
       ...e,
       randomImage: url,
